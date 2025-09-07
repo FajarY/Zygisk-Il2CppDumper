@@ -346,7 +346,7 @@ void il2cpp_api_init(void *handle) {
 void il2cpp_dump(const char *outDir) {
     LOGI("dumping...");
     size_t size;
-    auto testOutPath = std::string(outDir).append("/files/dump.cs");
+    auto testOutPath = std::string(outDir).append("/files/test.cs");
     std::ofstream testOutStream(testOutPath);
     
     auto domain = il2cpp_domain_get();
