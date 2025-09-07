@@ -348,7 +348,7 @@ void il2cpp_dump(const char *outDir) {
     size_t size;
 
     auto testOutPath = std::string(outDir).append("/files/dump.cs");
-    std::ofstream testOutStream(outPath);
+    std::ofstream testOutStream(testOutPath);
     testOutStream << "Hello";
     testOutStream.close();
     
