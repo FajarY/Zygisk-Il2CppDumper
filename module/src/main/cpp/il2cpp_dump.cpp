@@ -346,8 +346,14 @@ void il2cpp_api_init(void *handle) {
 void il2cpp_dump(const char *outDir) {
     LOGI("dumping...");
     size_t size;
+
+    auto testOutPath = std::string(outDir).append("/files/dump.cs");
+    std::ofstream testOutStream(outPath);
+    testOutStream << "Hello";
+    testOutStream.close();
+    
     auto domain = il2cpp_domain_get();
-    auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
+    //auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
 
     return;
     std::stringstream imageOutput;
