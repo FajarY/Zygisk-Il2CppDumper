@@ -351,10 +351,9 @@ void il2cpp_dump(const char *outDir) {
     std::ofstream testOutStream(testOutPath);
     testOutStream << "Hello";
     testOutStream.close();
+    return;
     
     auto domain = il2cpp_domain_get();
-
-    return;
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
     std::stringstream imageOutput;
     for (int i = 0; i < size; ++i) {
