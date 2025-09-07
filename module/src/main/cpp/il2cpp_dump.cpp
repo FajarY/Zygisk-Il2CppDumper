@@ -362,6 +362,7 @@ void il2cpp_dump(const char *outDir) {
         LOGI("Version greater than 2018.3");
         
         testOutStream << ">2018.3\n";
+        testOutStream.flush();
         
         //使用il2cpp_image_get_class
         for (int i = 0; i < size; ++i) {
@@ -372,8 +373,10 @@ void il2cpp_dump(const char *outDir) {
             for (int j = 0; j < classCount; ++j) {
                 auto klass = il2cpp_image_get_class(image, j);
                 testOutStream << "Class\n";
+                testOutStream.flush();
                 auto type = il2cpp_class_get_type(const_cast<Il2CppClass *>(klass));
                 testOutStream << "Type\n";
+                testOutStream.flush();
                 //LOGD("type name : %s", il2cpp_type_get_name(type));
                 auto outPut = imageStr.str() + dump_type(type);
                 outPuts.push_back(outPut);
@@ -386,14 +389,18 @@ void il2cpp_dump(const char *outDir) {
         //使用反射
 
         testOutStream << "<2018.3\n";
+        testOutStream.flush();
         
         auto corlib = il2cpp_get_corlib();
 
         testOutStream << "corlib\n";
+        testOutStream.flush();
         auto assemblyClass = il2cpp_class_from_name(corlib, "System.Reflection", "Assembly");
         testOutStream << "classfromname\n";
+        testOutStream.flush();
         auto assemblyLoad = il2cpp_class_get_method_from_name(assemblyClass, "Load", 1);
         testOutStream << "classmethodfromname\n";
+        testOutStream.flush();
         auto assemblyGetTypes = il2cpp_class_get_method_from_name(assemblyClass, "GetTypes", 0);
 
         if (assemblyLoad && assemblyLoad->methodPointer) {
@@ -421,6 +428,7 @@ void il2cpp_dump(const char *outDir) {
             auto imageNameNoExt = imageName.substr(0, pos);
             auto assemblyFileName = il2cpp_string_new(imageNameNoExt.data());
             testOutStream << "new\n";
+            testOutStream.flush();
             auto reflectionAssembly = ((Assembly_Load_ftn) assemblyLoad->methodPointer)(nullptr,
                                                                                         assemblyFileName,
                                                                                         nullptr);
@@ -430,8 +438,10 @@ void il2cpp_dump(const char *outDir) {
             for (int j = 0; j < reflectionTypes->max_length; ++j) {
                 auto klass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
                 testOutStream << "classfromsystem\n";
+                testOutStream.flush();
                 auto type = il2cpp_class_get_type(klass);
                 testOutStream << "classgettype\n";
+                testOutStream.flush();
                 //LOGD("type name : %s", il2cpp_type_get_name(type));
                 auto outPut = imageStr.str() + dump_type(type);
                 outPuts.push_back(outPut);
