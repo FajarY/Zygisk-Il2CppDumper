@@ -355,13 +355,6 @@ void il2cpp_dump(const char *outDir) {
         auto image = il2cpp_assembly_get_image(assemblies[i]);
         imageOutput << "// Image " << i << ": " << il2cpp_image_get_name(image) << "\n";
     }
-
-    auto testOutPath = std::string(outDir).append("/files/dump.cs");
-    std::ofstream testOutStream(testOutPath);
-    testOutStream << "Kon";
-    testOutStream.close();
-    return;
-    
     std::vector<std::string> outPuts;
     if (il2cpp_image_get_class) {
         LOGI("Version greater than 2018.3");
@@ -379,6 +372,11 @@ void il2cpp_dump(const char *outDir) {
                 outPuts.push_back(outPut);
             }
         }
+        auto testOutPath = std::string(outDir).append("/files/dump.cs");
+        std::ofstream testOutStream(testOutPath);
+        testOutStream << "eek";
+        testOutStream.close();
+        return;
     } else {
         LOGI("Version less than 2018.3");
         //使用反射
@@ -386,6 +384,12 @@ void il2cpp_dump(const char *outDir) {
         auto assemblyClass = il2cpp_class_from_name(corlib, "System.Reflection", "Assembly");
         auto assemblyLoad = il2cpp_class_get_method_from_name(assemblyClass, "Load", 1);
         auto assemblyGetTypes = il2cpp_class_get_method_from_name(assemblyClass, "GetTypes", 0);
+
+        auto testOutPath = std::string(outDir).append("/files/dump.cs");
+        std::ofstream testOutStream(testOutPath);
+        testOutStream << "lolok";
+        testOutStream.close();
+        return;
         if (assemblyLoad && assemblyLoad->methodPointer) {
             LOGI("Assembly::Load: %p", assemblyLoad->methodPointer);
         } else {
